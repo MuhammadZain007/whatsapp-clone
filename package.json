@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp-clone-web",
+  "version": "1.0.0",
+  "description": "WhatsApp Clone - Real-time messaging web app",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=8080 --open=login.html",
+    "dev": "live-server --port=8080 --open=login.html"
+  },
+  "keywords": [
+    "whatsapp",
+    "chat",
+    "messaging",
+    "supabase",
+    "real-time"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

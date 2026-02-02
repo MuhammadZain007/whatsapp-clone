@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone - Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Chat Header -->
+        <header class="chat-header">
+            <div class="header-left">
+                <button class="icon-btn back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <img src="https://ui-avatars.com/api/?name=User&background=075e54&color=fff" alt="Profile" class="profile-pic" id="chatProfilePic">
+                <div class="chat-info">
+                    <h3 id="chatName">Loading...</h3>
+                    <p class="status" id="chatStatus">online</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="icon-btn">
+                    <i class="fas fa-phone"></i>
+                </button>
+                <button class="icon-btn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Messages Area -->
+        <div class="messages-container" id="messagesContainer">
+            <div class="messages-list" id="messagesList">
+                <!-- Messages will be loaded here -->
+                <div class="empty-state">
+                    <i class="fas fa-lock"></i>
+                    <p>Messages are end-to-end encrypted</p>
+                    <small>No one outside of this chat can read them</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Input -->
+        <div class="message-input-container">
+            <button class="icon-btn">
+                <i class="fas fa-face-smile"></i>
+            </button>
+            <button class="icon-btn">
+                <i class="fas fa-paperclip"></i>
+            </button>
+            <input type="text" placeholder="Type a message" id="messageInput" class="message-input">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
