@@ -4,13 +4,36 @@ Modern, real-time messaging web application similar to WhatsApp, built with vani
 
 ## ✨ Features
 
+### Core Features
 - 🔐 **User Authentication** - Email/password registration and login
 - 💬 **Real-time Messaging** - Send and receive messages instantly
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
 - 🎨 **WhatsApp UI** - Familiar green theme and interface
 - ⚡ **Fast & Lightweight** - No heavy frameworks, pure JavaScript
 - 🔔 **Live Updates** - Automatic message sync using Supabase Realtime
-- 🔒 **Secure** - End-to-end encrypted (displayed in UI)
+- 🔒 **Secure** - Row-level security policies
+
+### 🆕 NEW Features (Latest Update)
+
+#### **Group Chats** 👥
+- Create groups with multiple members
+- Add/remove members
+- Group admin controls
+- Real-time group messaging
+- See all group members
+
+#### **Image Sharing** 🖼️
+- Upload and share images in chats
+- Image preview before sending
+- Click images to expand
+- Support for JPEG, PNG, GIF, WebP
+- Max 10MB per image
+
+#### **Modern UI** 🎨
+- Beautiful gradient backgrounds
+- Smooth animations
+- Enhanced shadows and effects
+- Dark theme with green accents
 
 ## 🚀 Quick Start
 
@@ -19,35 +42,6 @@ Modern, real-time messaging web application similar to WhatsApp, built with vani
 - VS Code (ya koi bhi code editor)
 - Node.js installed (optional, for live-server)
 - Modern web browser (Chrome, Edge, Firefox)
-
-### 📥 Installation Steps
-
-#### 1. Supabase Setup (FREE - Bohot Important!)
-
-**Step 1: Create Supabase Account**
-```
-1. https://supabase.com pe jao
-2. "Start your project" click karo
-3. GitHub se sign in karo (ya email se)
-4. FREE hai, credit card nahi chahiye!
-```
-
-**Step 2: Create New Project**
-```
-1. Dashboard mein "New Project" click karo
-2. Project ka naam do: "whatsapp-clone"
-3. Strong password set karo (save kar lena!)
-4. Region select karo (closest to you)
-5. Free plan select karo
-6. "Create new project" button press karo
-7. 2-3 minute wait karo (project setup ho raha hai)
-```
-
-**Step 3: Get API Keys**
-```
-1. Project dashboard mein jao
-2. Left sidebar mein "Settings" (gear icon) click karo
-3. "API" section mein jao
 4. Copy karo:
    - Project URL (example: https://xxxxx.supabase.co)
    - anon/public key (bohot lamba hoga)

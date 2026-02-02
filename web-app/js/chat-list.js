@@ -18,6 +18,7 @@ function setupEventListeners() {
     const menuBtn = document.getElementById('menuBtn');
     const menuDropdown = document.getElementById('menuDropdown');
     const newChatBtn = document.getElementById('newChatBtn');
+    const createGroupBtn = document.getElementById('createGroupBtn');
     const searchInput = document.getElementById('searchInput');
     
     if (menuBtn) {
@@ -29,6 +30,10 @@ function setupEventListeners() {
     
     if (newChatBtn) {
         newChatBtn.addEventListener('click', showNewChatDialog);
+    }
+    
+    if (createGroupBtn) {
+        createGroupBtn.addEventListener('click', showCreateGroupDialog);
     }
     
     if (searchInput) {
@@ -219,6 +224,102 @@ async function startNewChat() {
     } catch (error) {
         console.error('Error starting chat:', error);
         alert('Failed to start chat');
+    }
+}
+
+// Show create group dialog
+async function showCreateGroupDialog() {
+    const modal = document.getElementById('createGroupModal');
+    modal.classList.add('active');
+    
+    // Load all users for member selection
+    try {
+        const { data: users } = await window.supabase
+            .from('profiles')
+            .select('id, full_name, email')
+            .neq('id', currentUser.id);
+        
+        const membersList = document.getElementById('membersList');
+        membersList.innerHTML = '';
+        
+        users.forEach(user => {
+            const label = document.createElement('label');
+            label.className = 'member-checkbox';
+            label.style.cssText = `
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                cursor: pointer;
+                border-radius: 4px;
+                transition: background 0.2s;
+            `;
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = user.id;
+            checkbox.style.marginRight = '8px';
+            
+            const text = document.createElement('span');
+            text.textContent = `${user.full_name} (${user.email})`;
+            
+            label.appendChild(checkbox);
+            label.appendChild(text);
+            
+            label.addEventListener('mouseover', () => {
+                label.style.background = '#f0f0f0';
+            });
+            label.addEventListener('mouseout', () => {
+                label.style.background = 'transparent';
+            });
+            
+            membersList.appendChild(label);
+        });
+    } catch (error) {
+        console.error('Error loading users:', error);
+    }
+}
+
+// Close create group dialog
+function closeCreateGroupDialog() {
+    const modal = document.getElementById('createGroupModal');
+    modal.classList.remove('active');
+    document.getElementById('groupName').value = '';
+    document.getElementById('groupDescription').value = '';
+}
+
+// Create new group
+async function createNewGroup() {
+    const groupName = document.getElementById('groupName').value.trim();
+    
+    if (!groupName) {
+        alert('Please enter group name');
+        return;
+    }
+    
+    const description = document.getElementById('groupDescription').value.trim();
+    
+    // Get selected members
+    const checkboxes = document.querySelectorAll('.member-checkbox input[type="checkbox"]:checked');
+    const memberIds = Array.from(checkboxes).map(cb => cb.value);
+    
+    if (memberIds.length === 0) {
+        alert('Please select at least one member');
+        return;
+    }
+    
+    try {
+        const result = await createGroup(groupName, description, memberIds);
+        
+        if (result.success) {
+            closeCreateGroupDialog();
+            loadChats();
+            alert('Group created successfully!');
+        } else {
+            alert('Failed to create group: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Error creating group:', error);
+        alert('Error creating group');
     }
 }
 
