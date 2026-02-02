@@ -181,17 +181,25 @@ async function startNewChat() {
     }
     
     try {
-        // Find user by email
-        const { data: profile, error } = await window.supabase
+        // Find user by email (case-insensitive)
+        const { data: profiles, error } = await window.supabase
             .from('profiles')
             .select('*')
-            .eq('email', recipientEmail)
-            .single();
+            .ilike('email', recipientEmail);
         
-        if (error || !profile) {
-            alert('User not found');
+        if (error) {
+            console.error('Error finding user:', error);
+            alert('Error finding user: ' + error.message);
             return;
         }
+        
+        if (!profiles || profiles.length === 0) {
+            console.error('No user found with email:', recipientEmail);
+            alert('User not found with email: ' + recipientEmail + '. Make sure they have registered.');
+            return;
+        }
+        
+        const profile = profiles[0];
         
         if (profile.id === currentUser.id) {
             alert('Cannot chat with yourself');
@@ -231,7 +239,7 @@ async function startNewChat() {
         
     } catch (error) {
         console.error('Error starting chat:', error);
-        alert('Failed to start chat');
+        alert('Failed to start chat: ' + error.message);
     }
 }
 

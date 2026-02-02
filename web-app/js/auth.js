@@ -157,6 +157,10 @@ async function handleRegister(event) {
             
             if (profileError) {
                 console.error('Profile creation error:', profileError);
+                showError('Account created but profile setup failed. Please contact support.');
+                throw profileError;
+            } else {
+                console.log('✅ Profile created successfully for:', email);
             }
         }
         
