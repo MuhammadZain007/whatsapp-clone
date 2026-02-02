@@ -51,7 +51,7 @@ function setupEventListeners() {
 // Load chats
 async function loadChats() {
     try {
-        const { data: chats, error } = await supabase
+        const { data: chats, error } = await window.supabase
             .from('chats')
             .select('*')
             .or(`user1.eq.${currentUser.id},user2.eq.${currentUser.id}`)
@@ -86,7 +86,7 @@ async function displayChats(chats) {
         const otherUserId = chat.user1 === currentUser.id ? chat.user2 : chat.user1;
         
         // Get other user's profile
-        const { data: profile } = await supabase
+        const { data: profile } = await window.supabase
             .from('profiles')
             .select('*')
             .eq('id', otherUserId)
@@ -174,7 +174,7 @@ async function startNewChat() {
     
     try {
         // Find user by email
-        const { data: profile, error } = await supabase
+        const { data: profile, error } = await window.supabase
             .from('profiles')
             .select('*')
             .eq('email', recipientEmail)
@@ -191,7 +191,7 @@ async function startNewChat() {
         }
         
         // Check if chat already exists
-        const { data: existingChat } = await supabase
+        const { data: existingChat } = await window.supabase
             .from('chats')
             .select('*')
             .or(`and(user1.eq.${currentUser.id},user2.eq.${profile.id}),and(user1.eq.${profile.id},user2.eq.${currentUser.id})`)
@@ -203,7 +203,7 @@ async function startNewChat() {
         }
         
         // Create new chat
-        const { data: newChat, error: chatError } = await supabase
+        const { data: newChat, error: chatError } = await window.supabase
             .from('chats')
             .insert([
                 {
@@ -342,7 +342,7 @@ function handleSearch(event) {
 
 // Setup realtime subscription
 function setupRealtimeSubscription() {
-    chatsSubscription = supabase
+    chatsSubscription = window.supabase
         .channel('chats')
         .on('postgres_changes', 
             { 

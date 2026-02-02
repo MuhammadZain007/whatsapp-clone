@@ -46,7 +46,7 @@ function setupMessageInput() {
 // Load messages
 async function loadMessages() {
     try {
-        const { data: messages, error } = await supabase
+        const { data: messages, error } = await window.supabase
             .from('messages')
             .select('*')
             .eq('chat_id', currentChatId)
@@ -119,7 +119,7 @@ async function sendMessage() {
     
     try {
         // Insert message
-        const { data: message, error } = await supabase
+        const { data: message, error } = await window.supabase
             .from('messages')
             .insert([
                 {
@@ -135,7 +135,7 @@ async function sendMessage() {
         if (error) throw error;
         
         // Update chat's last message
-        await supabase
+        await window.supabase
             .from('chats')
             .update({
                 last_message: content,
@@ -167,7 +167,7 @@ async function sendMessage() {
 
 // Setup realtime subscription for new messages
 function setupRealtimeSubscription() {
-    messagesSubscription = supabase
+    messagesSubscription = window.supabase
         .channel(`messages:${currentChatId}`)
         .on('postgres_changes', 
             { 
