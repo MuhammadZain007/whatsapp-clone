@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone - Chat List</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="header-left">
+                <img src="https://ui-avatars.com/api/?name=User&background=075e54&color=fff" alt="Profile" class="profile-pic">
+                <h2>WhatsApp Clone</h2>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" id="newChatBtn">
+                    <i class="fas fa-message"></i>
+                </button>
+                <button class="icon-btn" id="menuBtn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search or start new chat" id="searchInput">
+        </div>
+
+        <!-- Chat List -->
+        <div class="chat-list" id="chatList">
+            <!-- Chats will be loaded here dynamically -->
+            <div class="empty-state">
+                <i class="fas fa-comments"></i>
+                <p>No conversations yet</p>
+                <button class="btn-primary" onclick="showNewChatDialog()">Start New Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Chat Dialog -->
+    <div class="modal" id="newChatModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Chat</h3>
+                <button class="close-btn" onclick="closeNewChatDialog()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Enter user email" id="recipientEmail" class="input-field">
+                <input type="text" placeholder="Enter user name" id="recipientName" class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeNewChatDialog()">Cancel</button>
+                <button class="btn-primary" onclick="startNewChat()">Start Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Dropdown -->
+    <div class="dropdown-menu" id="menuDropdown">
+        <a href="#" onclick="showProfile()">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/chat-list.js"></script>
+</body>
+</html>
