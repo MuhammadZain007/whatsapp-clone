@@ -181,25 +181,36 @@ async function startNewChat() {
     }
     
     try {
+        console.log('🔍 Searching for user with email:', recipientEmail);
+        
         // Find user by email (case-insensitive)
         const { data: profiles, error } = await window.supabase
             .from('profiles')
             .select('*')
             .ilike('email', recipientEmail);
         
+        console.log('📊 Query result:', { profiles, error });
+        
         if (error) {
-            console.error('Error finding user:', error);
+            console.error('❌ Error finding user:', error);
             alert('Error finding user: ' + error.message);
             return;
         }
         
+        // Debug: Show all profiles in console
+        const { data: allProfiles } = await window.supabase
+            .from('profiles')
+            .select('id, email, full_name');
+        console.log('👥 All profiles in database:', allProfiles);
+        
         if (!profiles || profiles.length === 0) {
-            console.error('No user found with email:', recipientEmail);
-            alert('User not found with email: ' + recipientEmail + '. Make sure they have registered.');
+            console.error('❌ No user found with email:', recipientEmail);
+            alert('User not found with email: ' + recipientEmail + '\n\nMake sure:\n1. They have registered\n2. Email is correct\n3. Check browser console (F12) for details');
             return;
         }
         
         const profile = profiles[0];
+        console.log('✅ Found user:', profile);
         
         if (profile.id === currentUser.id) {
             alert('Cannot chat with yourself');
