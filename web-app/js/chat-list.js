@@ -48,6 +48,14 @@ function setupEventListeners() {
     });
 }
 
+// Toggle menu dropdown (safe for inline handler)
+function toggleMenuDropdown() {
+    const menuDropdown = document.getElementById('menuDropdown');
+    if (menuDropdown) {
+        menuDropdown.classList.toggle('active');
+    }
+}
+
 // Load chats
 async function loadChats() {
     try {

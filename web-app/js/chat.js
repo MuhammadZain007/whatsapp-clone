@@ -214,6 +214,19 @@ function goBack() {
     window.location.href = 'index.html';
 }
 
+// Header button actions (placeholders)
+function startVideoCall() {
+    alert('Video call feature coming soon!');
+}
+
+function startVoiceCall() {
+    alert('Voice call feature coming soon!');
+}
+
+function showChatMenu() {
+    alert('More options coming soon!');
+}
+
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
     if (messagesSubscription) {
